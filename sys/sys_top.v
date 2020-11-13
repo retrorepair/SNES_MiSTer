@@ -1222,8 +1222,9 @@ csync csync_vga(clk_vid, vga_hs_osd, vga_vs_osd, vga_cs_osd);
 	wire vs1 = (vga_fb | vga_scaler) ? hdmi_vs_osd : vga_vs_osd;
 	wire hs1 = (vga_fb | vga_scaler) ? hdmi_hs_osd : vga_hs_osd;
 	wire cs1 = (vga_fb | vga_scaler) ? hdmi_cs_osd : vga_cs_osd;
+	wire clk_sc;
 
-	assign VGA_VS = (VGA_EN | SW[3]) ? 1'bZ      : csync_en ? 1'b1 : ~vs1;
+	assign VGA_VS = (VGA_EN | SW[3]) ? 1'bZ      : csync_en ? clk_sc : ~vs1;
 	assign VGA_HS = (VGA_EN | SW[3]) ? 1'bZ      : csync_en ? ~cs1 : ~hs1;
 	assign VGA_R  = (VGA_EN | SW[3]) ? 6'bZZZZZZ : vga_o[23:18];
 	assign VGA_G  = (VGA_EN | SW[3]) ? 6'bZZZZZZ : vga_o[15:10];
@@ -1460,6 +1461,7 @@ emu emu
 	.VGA_DE(de_emu),
 	.VGA_F1(f1),
 	.VGA_SCALER(vga_force_scaler),
+	.clk_sc(clk_sc),
 
 	.CLK_VIDEO(clk_vid),
 	.CE_PIXEL(ce_pix),
