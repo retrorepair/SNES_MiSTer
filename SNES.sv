@@ -50,6 +50,8 @@ module emu
 	output        VGA_F1,
 	output [1:0]  VGA_SL,
 	output        VGA_SCALER, // Force VGA scaler
+	
+	output		  clk_sc,
 
 	output        LED_USER,  // 1 - ON, 0 - OFF.
 
@@ -157,6 +159,7 @@ pll pll
 	.outclk_0(clk_mem),
 	.outclk_1(CLK_VIDEO),
 	.outclk_2(clk_sys),
+	.outclk_3(clk_sc),
 	.reconfig_to_pll(reconfig_to_pll),
 	.reconfig_from_pll(reconfig_from_pll),
 	.locked(clock_locked)
